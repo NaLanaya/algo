@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Комбинаторика</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+          color: #333;
+      }
+
+      h1 {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+      }
+
+      h2 {
+          color: #333;
+          padding: 10px;
+          background-color: #ddd;
+      }
+
+      h3 {
+          color: #333;
+      }
+
+      p {
+          margin: 10px;
+      }
+
+      ul {
+          margin: 10px 20px;
+      }
+  </style>
+</head>
+<body>
+    <h1>Комбинаторика</h1>
+    <p>Комбинаторика - это раздел математики, который изучает различные комбинаторные структуры и способы подсчёта их числа. Этот раздел математики широко применяется в задачах перестановок, сочетаний, размещений, а также в теории вероятности и дискретной математике.</p>
+
+    <h2>Основные понятия в комбинаторике</h2>
+    <ul>
+        <li><strong>Перестановка:</strong> Упорядоченное размещение элементов. Например, для множества {A, B, C} существует 6 различных перестановок: ABC, ACB, BAC, BCA, CAB и CBA.</li>
+        <li><strong>Сочетание:</strong> Неупорядоченный набор элементов. Например, для множества {A, B, C} существует 3 различных сочетания по 2 элемента: AB, AC и BC.</li>
+        <li><strong>Размещение:</strong> Упорядоченное выборка элементов без повторений. Например, для множества {A, B, C} существует 6 различных размещений по 2 элемента: AB, AC, BA, BC, CA и CB.</li>
+        <li><strong>Факториал:</strong> Факториал числа n, обозначается как n!, равен произведению всех целых чисел от 1 до n.</li>
+    </ul>
+
+    <h2>Примеры кода на C++</h2>
+    <h3>Вычисление факториала</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+
+// Функция для вычисления факториала числа n
+unsigned long long factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+
+    unsigned long long result = 1;
+    for (int i = 2; i &lt;= n; ++i) {
+        result *= i;
+    }
+
+    return result;
+}
+
+int main() {
+    int n = 5;
+    unsigned long long fact = factorial(n);
+
+    std::cout &lt;&lt; n &lt;&lt; "! = " &lt;&lt; fact &lt;&lt; std::endl;
+
+    return 0;
+}
+    </code></pre>
+
+    <h3>Генерация перестановок</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::vector&lt;int&gt; elements = {1, 2, 3};
+
+    do {
+        for (int element : elements) {
+            std::cout &lt;&lt; element &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
+    } while (std::next_permutation(elements.begin(), elements.end()));
+
+    return 0;
+}
+    </code></pre>
+
+    <!-- Дополните информацию о других комбинаторных задачах и алгоритмах, если необходимо. -->
+
+</body>
+</html>

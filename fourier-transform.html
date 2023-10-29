@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Преобразование Фурье и Алгоритм БПФ</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+          color: #333;
+      }
+
+      h1 {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+      }
+
+      h2 {
+          color: #333;
+          padding: 10px;
+          background-color: #ddd;
+      }
+
+      h3 {
+          color: #333;
+      }
+
+      p {
+          margin: 10px;
+      }
+
+      ul {
+          margin: 10px 20px;
+      }
+  </style>
+</head>
+<body>
+    <h1>Преобразование Фурье и Алгоритм БПФ</h1>
+    <p>Преобразование Фурье - это важный математический инструмент, который позволяет анализировать сигналы и данные в частотной области. Оно находит применение в различных областях, включая обработку сигналов, компьютерное зрение и многие другие. Алгоритм Быстрого Преобразования Фурье (БПФ) - это эффективный метод вычисления преобразования Фурье и широко используется в программировании.</p>
+
+    <h2>Преобразование Фурье</h2>
+    <p>Преобразование Фурье преобразует сигнал из временной области в частотную область. Это позволяет анализировать различные составляющие сигнала, такие как частоты и амплитуды.</p>
+
+    <h2>Алгоритм БПФ (Быстрое Преобразование Фурье)</h2>
+    <p>Алгоритм БПФ - это метод вычисления преобразования Фурье с меньшей вычислительной сложностью, чем классический алгоритм. Он позволяет быстро вычислить преобразование Фурье для последовательностей с 2^n элементами. Алгоритм БПФ широко используется в цифровой обработке сигналов и других областях.</p>
+
+    <h2>Примеры кода на C++</h2>
+    <h3>Вычисление БПФ с использованием библиотеки FFTW</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;fftw3.h&gt;
+
+int main() {
+    const int N = 8; // Длина последовательности (должна быть степенью двойки)
+    fftw_complex* in = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+    fftw_complex* out = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+
+    // Инициализация входных данных
+    for (int i = 0; i &lt; N; i++) {
+        in[i][0] = i; // Действительная часть
+        in[i][1] = 0; // Мнимая часть
+    }
+
+    // Создание плана для преобразования Фурье
+    fftw_plan plan = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+
+    // Выполнение преобразования Фурье
+    fftw_execute(plan);
+
+    // Вывод результатов
+    for (int i = 0; i &lt; N; i++) {
+        std::cout &lt;&lt; "Выход " &lt;&lt; i &lt;&lt; ": " &lt;&lt; out[i][0] &lt;&lt; " + " &lt;&lt; out[i][1] &lt;&lt; "i" &lt;&lt; std::endl;
+    }
+
+    // Освобождение ресурсов
+    fftw_destroy_plan(plan);
+    fftw_free(in);
+    fftw_free(out);
+
+    return 0;
+}
+    </code></pre>
+
+    <h3>Вычисление свертки с использованием преобразования Фурье</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;fftw3.h&gt;
+
+int main() {
+    const int N = 4;
+    fftw_complex* signal = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+    fftw_complex* kernel = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+    fftw_complex* result = (fftw_complex*) fftw_malloc(sizeof(fftw_complex) * N);
+
+    // Инициализация сигнала и ядра
+    for (int i = 0; i &lt; N; i++) {
+        signal[i][0] = i;
+        signal[i][1] = 0;
+        kernel[i][0] = 1;
+        kernel[i][1] = 0;
+    }
+
+    // Создание планов для преобразования Фурье
+    fftw_plan signalPlan = fftw_plan_dft_1d(N, signal, signal, FFTW_FORWARD, FFTW_ESTIMATE);
+    fftw_plan kernelPlan = fftw_plan_dft_1d(N, kernel, kernel, FFTW_FORWARD, FFTW_ESTIMATE);
+
+    // Выполнение преобразований Фурье
+    fftw_execute(signalPlan);
+    fftw_execute(kernelPlan);
+
+    // Вычисление свертки в частотной области
+    for (int i = 0; i &lt; N; i++) {
+        double real = signal[i][0] * kernel[i][0] - signal[i][1] * kernel[i][1];
+        double imag = signal[i][0] * kernel[i][1] + signal[i][1] * kernel[i][0];
+        result[i][0] = real;
+        result[i][1] = imag;
+    }
+
+    // Создание плана для обратного преобразования Фурье
+    fftw_plan inversePlan = fftw_plan_dft_1d(N, result, result, FFTW_BACKWARD, FFTW_ESTIMATE);
+
+    // Выполнение обратного преобразования Фурье
+    fftw_execute(inversePlan);
+
+    // Вывод результата свертки
+    for (int i = 0; i &lt; N; i++) {
+        std::cout &lt;&lt; "Результат свертки " &lt;&lt; i &lt;&lt; ": " &lt;&lt; result[i][0] / N &lt;&lt; std::endl;
+    }
+
+    // Освобождение ресурсов
+    fftw_destroy_plan(signalPlan);
+    fftw_destroy_plan(kernelPlan);
+    fftw_destroy_plan(inversePlan);
+    fftw_free(signal);
+    fftw_free(kernel);
+    fftw_free(result);
+
+    return 0;
+}
+    </code></pre>
+
+    <!-- Дополните информацию о других аспектах преобразования Фурье и его применении, если необходимо. -->
+
+</body>
+</html>

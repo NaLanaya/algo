@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Матрицы</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+          color: #333;
+      }
+
+      h1 {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+      }
+
+      h2 {
+          color: #333;
+          padding: 10px;
+          background-color: #ddd;
+      }
+
+      h3 {
+          color: #333;
+      }
+
+      p {
+          margin: 10px;
+      }
+
+      ul {
+          margin: 10px 20px;
+      }
+  </style>
+</head>
+<body>
+    <h1>Матрицы</h1>
+    <p>Матрицы - это структуры данных, которые представляют собой двумерные таблицы элементов, обычно чисел. Они широко используются в математике, науке, программировании и инженерии для хранения и обработки данных. Матрицы могут быть различных размеров, и у них есть множество операций, таких как сложение, умножение и транспонирование.</p>
+
+    <h2>Основные понятия в матрицах</h2>
+    <ul>
+        <li><strong>Матрица:</strong> Двумерная таблица чисел или элементов, организованных в строки и столбцы.</li>
+        <li><strong>Размерность матрицы:</strong> Количество строк и столбцов в матрице, обычно обозначается как MxN, где M - количество строк, а N - количество столбцов.</li>
+        <li><strong>Элемент матрицы:</strong> Отдельное значение в матрице, расположенное в строке и столбце. Обычно обозначается a[i][j], где i - номер строки, а j - номер столбца.</li>
+        <li><strong>Операции с матрицами:</strong> Матрицы поддерживают операции, такие как сложение, вычитание, умножение и транспонирование.</li>
+    </ul>
+
+    <h2>Примеры кода на C++</h2>
+    <h3>Сложение матриц</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    int rows = 3;
+    int cols = 3;
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; matrix1 = {{1, 2, 3},
+                                                      {4, 5, 6},
+                                                      {7, 8, 9}};
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; matrix2 = {{9, 8, 7},
+                                                      {6, 5, 4},
+                                                      {3, 2, 1}};
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; result(rows, std::vector&lt;int&gt;(cols, 0));
+
+    for (int i = 0; i &lt; rows; i++) {
+        for (int j = 0; j &lt; cols; j++) {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+
+    // Вывод результата
+    for (int i = 0; i &lt; rows; i++) {
+        for (int j = 0; j &lt; cols; j++) {
+            std::cout &lt;&lt; result[i][j] &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+    </code></pre>
+
+    <h3>Умножение матриц</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    int rows1 = 2;
+    int cols1 = 3;
+    int cols2 = 2;
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; matrix1 = {{1, 2, 3},
+                                                      {4, 5, 6}};
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; matrix2 = {{7, 8},
+                                                      {9, 10},
+                                                      {11, 12}};
+
+    std::vector&lt;std::vector&lt;int&gt;&gt; result(rows1, std::vector&lt;int&gt;(cols2, 0));
+
+    for (int i = 0; i &lt; rows1; i++) {
+        for (int j = 0; j &lt; cols2; j++) {
+            for (int k = 0; k &lt; cols1; k++) {
+                result[i][j] += matrix1[i][k] * matrix2[k][j];
+            }
+        }
+    }
+
+    // Вывод результата
+    for (int i = 0; i &lt; rows1; i++) {
+        for (int j = 0; j &lt; cols2; j++) {
+            std::cout &lt;&lt; result[i][j] &lt;&lt; " ";
+        }
+        std::cout &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+    </code></pre>
+
+    <!-- Дополните информацию о других операциях с матрицами и алгоритмах -->
+
+</body>
+</html>

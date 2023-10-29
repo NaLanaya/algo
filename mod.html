@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Минимальные остовные деревья</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            padding: 10px;
+            background-color: #ddd;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Минимальные остовные деревья</h1>
+    <p>Минимальное остовное дерево (МОД) в неориентированном связном графе - это подграф, содержащий все вершины и некоторое подмножество рёбер исходного графа, такое что он остается связным и его общая стоимость (или вес) минимальна.</p>
+
+    <h2>Алгоритм Прима</h2>
+    <p>Алгоритм Прима используется для нахождения МОД во взвешенном графе. Он начинает с одной начальной вершины и постепенно добавляет рёбра, так чтобы образовать МОД. Этот алгоритм подходит для использования в связных графах, включая графы с отрицательными весами рёбер.</p>
+
+    <h3>Пример кода на C++ для алгоритма Прима:</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;set&gt;
+
+struct Edge {
+    int to, weight;
+};
+
+const int INF = 1e9;
+
+// Представление графа в виде списков смежности
+std::vector&lt;std::vector&lt;Edge&gt;&gt; graph;
+
+int prim() {
+    int numNodes = graph.size();
+    std::vector&lt;bool&gt; visited(numNodes, false);
+    std::set&lt;std::pair&lt;int, int&gt;&gt; edges;
+    int totalCost = 0;
+
+    // Начать с первой вершины
+    int start = 0;
+
+    visited[start] = true;
+    for (const Edge &e : graph[start]) {
+        edges.insert({e.weight, e.to});
+    }
+
+    while (!edges.empty()) {
+        auto it = edges.begin();
+        int weight = it-&gt;first;
+        int to = it-&gt;second;
+        edges.erase(it);
+
+        if (visited[to]) {
+            continue;
+        }
+
+        visited[to] = true;
+        totalCost += weight;
+
+        for (const Edge &e : graph[to]) {
+            if (!visited[e.to]) {
+                edges.insert({e.weight, e.to});
+            }
+        }
+    }
+
+    return totalCost;
+}
+
+int main() {
+    // Заполните граф рёбрами и весами
+
+    int minSpanningTreeCost = prim();
+    std::cout &lt;&lt; "Стоимость минимального остовного дерева: " &lt;&lt; minSpanningTreeCost &lt;&lt; std::endl;
+
+    return 0;
+}
+    </code></pre>
+
+    <h2>Алгоритм Крускала</h2>
+    <p>Алгоритм Крускала также используется для нахождения МОД во взвешенном графе, но он начинает с пустого дерева и постепенно добавляет рёбра. Этот алгоритм подходит для использования в графах с отрицательными весами рёбер.</p>
+
+    <!-- Дополните информацию о других алгоритмах нахождения МОД -->
+</body>
+</html>

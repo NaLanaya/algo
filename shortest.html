@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Кратчайшие пути в графах</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            padding: 10px;
+            background-color: #ddd;
+        }
+
+        h3 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Кратчайшие пути в графах</h1>
+    <p>Кратчайшие пути в графах - это одна из важнейших задач в теории графов и алгоритмике. Эта задача заключается в поиске пути между вершинами графа с минимальной стоимостью или длиной.</p>
+
+    <h2>Основные концепции</h2>
+    <ul>
+        <li><strong>Взвешенные графы:</strong> Графы, в которых рёбра имеют числовые веса, представляющие стоимость, длину или другие метрики.</li>
+        <li><strong>Кратчайший путь:</strong> Путь между вершинами с наименьшей суммой весов рёбер.</li>
+        <li><strong>Алгоритмы:</strong> Существует несколько алгоритмов для нахождения кратчайших путей, такие как алгоритм Дейкстры, алгоритм Флойда-Уоршелла и алгоритм Беллмана-Форда.</li>
+    </ul>
+
+    <h2>Алгоритм Дейкстры</h2>
+    <p>Алгоритм Дейкстры используется для нахождения кратчайших путей от одной вершины до всех остальных вершин в графе. Этот алгоритм подходит для использования в случаях, когда все веса рёбер должны быть положительными.</p>
+
+    <h3>Пример кода на C++ для алгоритма Дейкстры:</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+
+const int INF = 1e9;
+
+// Представление графа в виде списков смежности
+std::vector&lt;std::vector&lt;std::pair&lt;int, int&gt;&gt;&gt; graph;
+
+void dijkstra(int start, std::vector&lt;int&gt; &dist) {
+    std::priority_queue&lt;std::pair&lt;int, int&gt;&gt; pq;
+    dist[start] = 0;
+    pq.push({0, start});
+
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int distance = -pq.top().first;
+        pq.pop();
+
+        if (distance > dist[u]) {
+            continue;
+        }
+
+        for (const auto &edge : graph[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+
+            if (dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({-dist[v], v});
+            }
+        }
+    }
+}
+
+int main() {
+    int numNodes = 6;
+    graph.resize(numNodes);
+    // Заполните граф рёбрами и весами
+
+    int startVertex = 0;
+    std::vector&lt;int&gt; distance(numNodes, INF);
+
+    dijkstra(startVertex, distance);
+
+    // Выведите кратчайшие пути
+
+    return 0;
+}
+    </code></pre>
+
+    <h2>Алгоритм Флойда-Уоршелла</h2>
+    <p>Алгоритм Флойда-Уоршелла используется для нахождения кратчайших путей между всеми парами вершин в графе. Он подходит для использования в случаях, когда граф может содержать отрицательные веса рёбер.</p>
+
+    <h2>Алгоритм Беллмана-Форда</h2>
+    <p>Алгоритм Беллмана-Форда используется для нахождения кратчайших путей от одной вершины до всех остальных взвешенных графов, включая графы с отрицательными весами рёбер. Он также может использоваться для обнаружения циклов с отрицательным весом.</p>
+
+    <!-- Дополните информацию о других алгоритмах, если необходимо. -->
+</body>
+</html>

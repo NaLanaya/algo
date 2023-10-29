@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вероятность</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+          color: #333;
+      }
+
+      h1 {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+      }
+
+      h2 {
+          color: #333;
+          padding: 10px;
+          background-color: #ddd;
+      }
+
+      h3 {
+          color: #333;
+      }
+
+      p {
+          margin: 10px;
+      }
+
+      ul {
+          margin: 10px 20px;
+      }
+  </style>
+</head>
+<body>
+    <h1>Вероятность</h1>
+    <p>Вероятность - это важный концепт в теории вероятности и статистике, который изучает случайные явления и их вероятные исходы. Вероятность позволяет нам оценивать шансы на различные события и принимать решения на основе этой оценки. Вероятность изучается в различных областях, таких как статистика, теория игр, машинное обучение и другие.</p>
+
+    <h2>Основные понятия в вероятности</h2>
+    <ul>
+        <li><strong>Событие:</strong> Исход, который мы хотим проанализировать и для которого мы хотим определить вероятность.</li>
+        <li><strong>Эксперимент:</strong> Процесс, который может привести к различным исходам, исследуемым как события.</li>
+        <li><strong>Пространство исходов:</strong> Множество всех возможных исходов эксперимента.</li>
+        <li><strong>Вероятность события:</strong> Вероятность того, что событие произойдет, обычно выражается как число от 0 до 1.</li>
+        <li><strong>Условная вероятность:</strong> Вероятность события, при условии, что другое событие уже произошло.</li>
+    </ul>
+
+    <h2>Примеры кода на C++</h2>
+    <h3>Симуляция броска монеты</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+#include &lt;ctime&gt;
+
+int main() {
+    // Инициализация генератора случайных чисел
+    std::srand(std::time(0));
+
+    // Симуляция броска монеты (0 - орёл, 1 - решка)
+    int outcome = std::rand() % 2;
+
+    if (outcome == 0) {
+        std::cout &lt;&lt; "Выпал орёл." &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; "Выпала решка." &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+    </code></pre>
+
+    <h3>Вычисление вероятности события при множестве экспериментов</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+
+int main() {
+    int totalExperiments = 1000; // Общее количество экспериментов
+    int favorableOutcomes = 0; // Количество благоприятных исходов
+    int event = 4; // Заданное событие (например, выпадение числа 4 на игральной кости)
+
+    for (int i = 0; i &lt; totalExperiments; i++) {
+        // Симуляция эксперимента (бросок игральной кости)
+        int outcome = std::rand() % 6 + 1;
+
+        if (outcome == event) {
+            favorableOutcomes++;
+        }
+    }
+
+    // Вычисление вероятности события
+    double probability = static_cast&lt;double&gt;(favorableOutcomes) / totalExperiments;
+    std::cout &lt;&lt; "Вероятность выпадения числа " &lt;&lt; event &lt;&lt; " = " &lt;&lt; probability &lt;&lt; std::endl;
+
+    return 0;
+}
+    </code></pre>
+
+    <!-- Дополните информацию о других аспектах вероятности и примерах кода, если необходимо. -->
+
+</body>
+</html>

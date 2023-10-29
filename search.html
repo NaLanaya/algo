@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Алгоритмы поиска на C++</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        code {
+            font-family: "Courier New", monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Линейный поиск (Linear Search)</h1>
+    <p>Линейный поиск является простейшим алгоритмом поиска. Он проходит по каждому элементу списка поочередно и сравнивает его с целевым значением. Если элемент найден, алгоритм возвращает его позицию.</p>
+
+    <h2>Пример кода на C++ для линейного поиска:</h2>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int linearSearch(const std::vector&lt;int&gt;& arr, int target) {
+    for (int i = 0; i &lt; arr.size(); i++) {
+        if (arr[i] == target) {
+            return i; // Найдено
+        }
+    }
+    return -1; // Не найдено
+}
+
+int main() {
+    std::vector&lt;int&gt; arr = {2, 4, 6, 8, 10};
+    int target = 6;
+    int result = linearSearch(arr, target);
+    if (result != -1) {
+        std::cout &lt;&lt; "Элемент " &lt;&lt; target &lt;&lt; " найден по индексу " &lt;&lt; result &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; "Элемент " &lt;&lt; target &lt;&lt; " не найден" &lt;&lt; std::endl;
+    }
+    return 0;
+}
+    </code></pre>
+
+    <h1>Бинарный поиск (Binary Search)</h1>
+    <p>Бинарный поиск применяется к упорядоченному списку. Алгоритм разделяет список пополам и сравнивает средний элемент с целевым значением. Если значение больше, то поиск продолжается в верхней половине списка, иначе - в нижней. Процесс повторяется до тех пор, пока не будет найден элемент или список будет исчерпан.</p>
+
+    <h2>Пример кода на C++ для бинарного поиска:</h2>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int binarySearch(const std::vector&lt;int&gt;& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target) {
+            return mid; // Найдено
+        }
+
+        if (arr[mid] &lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return -1; // Не найдено
+}
+
+int main() {
+    std::vector&lt;int&gt; arr = {2, 4, 6, 8, 10};
+    int target = 6;
+    int result = binarySearch(arr, target);
+    if (result != -1) {
+        std::cout &lt;&lt; "Элемент " &lt;&lt; target &lt;&lt; " найден по индексу " &lt;&lt; result &lt;&lt; std::endl;
+    } else {
+        std::cout &lt;&lt; "Элемент " &lt;&lt; target &lt;&lt; " не найден" &lt;&lt; std::endl;
+    }
+    return 0;
+}
+    </code></pre>
+
+    <h1>Бинарный поиск по ответу (Binary Search for Answer)</h1>
+    <p>Бинарный поиск по ответу - это модификация бинарного поиска, применяемая к задачам оптимизации. Вместо поиска конкретного элемента, этот алгоритм находит минимальное (или максимальное) значение, которое соответствует определенным условиям. Поиск продолжается, подстраиваясь под условия и уточняя результат.</p>
+    <!-- Пример кода для бинарного поиска по ответу можно добавить  -->
+</body>
+</html>

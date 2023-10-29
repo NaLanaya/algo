@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Сортировка пузырьком и сортировка слиянием</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        pre {
+            background-color: #eee;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        code {
+            font-family: "Courier New", monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Сортировка пузырьком (Bubble Sort)</h1>
+    <p>Сортировка пузырьком является одним из самых простых алгоритмов сортировки. Она работает путем сравнения и обмена соседних элементов до тех пор, пока весь массив не будет упорядочен. В каждой итерации наибольший элемент "всплывает" на своё место.</p>
+
+    <h2>Пример кода на C++ для сортировки пузырьком:</h2>
+    <pre><code class="cpp">
+        void bubbleSort(int arr[], int n) {
+            for (int i = 0; i &lt; n - 1; i++) {
+                for (int j = 0; j &lt; n - i - 1; j++) {
+                    if (arr[j] &gt; arr[j + 1]) {
+                        // Обмен элементов, если текущий больше следующего
+                        int temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    </code></pre>
+
+    <h1>Сортировка слиянием (Merge Sort)</h1>
+    <p>Сортировка слиянием является более эффективным алгоритмом по сравнению с сортировкой пузырьком. Он использует принцип "разделяй и властвуй". Алгоритм разделяет список пополам, рекурсивно сортирует каждую половину, а затем объединяет их в упорядоченный список.</p>
+
+    <h2>Пример кода на C++ для сортировки слиянием:</h2>
+    <pre><code class="cpp">
+        void mergeSort(std::vector<int>& arr, int left, int right) {
+            if (left &lt; right) {
+                int mid = left + (right - left) / 2;
+                mergeSort(arr, left, mid);
+                mergeSort(arr, mid + 1, right);
+                merge(arr, left, mid, right);
+            }
+        }
+    </code></pre>
+
+    <h1>Почему сейчас сортировками никто не занимается?</h1>
+    <p>Сортировки, такие как пузырьком, редко используются в современном программировании по нескольким причинам: сложность и производительность, наличие более эффективных алгоритмов и готовых библиотек в стандартных языках программирования.</p>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Обход графа</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+          color: #333;
+        }
+
+        h1 {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+        }
+
+        h2 {
+          color: #333;
+          padding: 10px;
+          background-color: #ddd;
+        }
+
+        h3 {
+          color: #333;
+        }
+
+        p {
+          margin: 10px;
+        }
+
+        pre {
+          background-color: #f0f0f0;
+          padding: 10px;
+          overflow: auto;
+        }
+
+        code {
+          font-family: monospace;
+          font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Обход графа</h1>
+    <p>Обход графа - это процесс посещения всех вершин графа с учетом их связей. Этот процесс позволяет анализировать структуру графа и находить определенные пути, связи или решения задач, связанные с графами.</p>
+
+    <h2>Обход в глубину (DFS - Depth-First Search)</h2>
+    <p>Обход в глубину - это алгоритм обхода графа, который исследует одну ветвь графа как можно глубже, прежде чем возвращаться и исследовать другие ветви. Он может быть реализован с использованием рекурсии или стека.</p>
+
+    <h3>Пример кода на C++ для обхода в глубину:</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;stack&gt;
+
+// Представление графа в виде списков смежности
+std::vector&lt;std::vector&lt;int&gt;&gt; graph;
+
+void dfs(int vertex, std::vector&lt;bool&gt; &visited) {
+    visited[vertex] = true;
+    std::cout &lt;&lt; "Посещено узел: " &lt;&lt; vertex &lt;&lt; std::endl;
+
+    for (int neighbor : graph[vertex]) {
+        if (!visited[neighbor]) {
+            dfs(neighbor, visited);
+        }
+    }
+}
+
+int main() {
+    int numNodes = 6;
+    graph.resize(numNodes);
+    graph[0] = {1, 2};
+    graph[1] = {0, 3, 4};
+    graph[2] = {0, 5};
+    graph[3] = {1};
+    graph[4] = {1};
+    graph[5] = {2};
+
+    std::vector&lt;bool&gt; visited(numNodes, false);
+
+    for (int i = 0; i &lt; numNodes; i++) {
+        if (!visited[i]) {
+            dfs(i, visited);
+        }
+    }
+
+    return 0;
+}
+    </code></pre>
+
+    <h2>Обход в ширину (BFS - Breadth-First Search)</h2>
+    <p>Обход в ширину - это алгоритм обхода графа, который исследует вершины на одинаковой глубине, прежде чем переходить к вершинам на более глубоком уровне. Он может быть реализован с использованием очереди.</p>
+
+    <h3>Пример кода на C++ для обхода в ширину:</h3>
+    <pre><code class="cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+
+// Представление графа в виде списков смежности
+std::vector&lt;std::vector&lt;int&gt;&gt; graph;
+
+void bfs(int start) {
+    std::vector&lt;bool&gt; visited(graph.size(), false);
+    std::queue&lt;int&gt; q;
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty()) {
+        int vertex = q.front();
+        q.pop();
+        std::cout &lt;&lt; "Посещено узел: " &lt;&lt; vertex &lt;&lt; std::endl;
+
+        for (int neighbor : graph[vertex]) {
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+    }
+}
+
+int main() {
+    int numNodes = 6;
+    graph.resize(numNodes);
+    graph[0] = {1, 2};
+    graph[1] = {0, 3, 4};
+    graph[2] = {0, 5};
+    graph[3] = {1};
+    graph[4] = {1};
+    graph[5] = {2};
+
+    bfs(0);
+
+    return 0;
+}
+    </code></pre>
+
+    <!-- Дополните информацию о других типах обхода графа -->
+</body>
+</html>
